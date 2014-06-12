@@ -17,11 +17,27 @@ class Main extends PluginBase{
 		switch($cmd->getName()){
 			case "banhammer":
 				if($args[0] == "edit"){
-				    //TODO BanHammer Editing
+				    if($args[1] == "type"){
+				    	if($args[2] == "banip"){
+				    	    
+				    	}elseif($args[2] == "ban"){
+				    	    
+				    	}elseif($args[2] == "kick"){
+				    	    
+				    	}else{
+				    	    $sender->sendMessage("Usage: /banhammer edit <type> <banip|ban|kick>");
+				    	}
+				    }
 				}elseif($args[0] == "get"){
-					//TODO Give BanHammer
+				    if($sender->isOP){ //I'll figure our the real way to do that later
+				    	//TODO Give BanHammer
+				    	return true;
+				    }else{
+				    	$sender->sendMessage("[BanHammer] You do not have permission to obtain the BanHammer!");
+				    	return false;
+				    }
 				}else{
-					$sender->sendMessage("Usage: /banhammer <edit|get>");
+				    $sender->sendMessage("Usage: /banhammer <edit|get>");
 				}
 			break;
 		}
