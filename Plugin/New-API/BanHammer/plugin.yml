@@ -1,5 +1,8 @@
-name: BanHammer
-version: 1.8.0
+name: HerobrineAlive
+main: HerobrineAlive\Main
+version: 1.8.0dev
 api: [1.0.0]
 
+load: POSTWORLD
 authors: [Comedyman937]
+description: The BanHammer Has Spoken!
