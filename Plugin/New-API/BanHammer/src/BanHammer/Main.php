@@ -36,8 +36,10 @@ class Main extends PluginBase{
 				    	$sender->sendMessage("[BanHammer] You do not have permission to obtain the BanHammer!");
 				    	return false;
 				    }
+				}elseif($args[0] == "allow"){
+					//TODO Add $args[1] to a config
 				}else{
-				    $sender->sendMessage("Usage: /banhammer <edit|get>");
+				    $sender->sendMessage("Usage: /banhammer <get|edit|allow> [player]");
 				}
 			break;
 		}
@@ -50,8 +52,8 @@ class Main extends PluginBase{
     * @ignoreCanceled false
     */
     public function onInteract(PlayerInteractEvent $event){
-        $player = $event->getPlayer();
-        
+    	$player = $event->getPlayer();
+        $target = $event->getPlayer($target); //Is this how we get the target?
     }
     
     public function onDisable(){
