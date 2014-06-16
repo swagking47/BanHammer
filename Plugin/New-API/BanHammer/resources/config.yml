@@ -1,0 +1,4 @@
+#BanHammer Configuration
+BanHammer: 286
+BanType: ban
+TimerBanTime: 6
