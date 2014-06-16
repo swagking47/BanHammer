@@ -6,3 +6,14 @@ api: [1.0.0]
 load: POSTWORLD
 authors: [Comedyman937]
 description: The BanHammer Has Spoken!
+
+commands:
+    banhammer:
+        desctiption: "Main BanHammer Command"
+        usage: "/banhammer <get|edit|allow> [player]"
+        aiases: [bh]
+        permission: banhammer.command.banhammer
+        
+permissions:
+    banhammer.command.banhammer:
+        default: false
