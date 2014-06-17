@@ -5,6 +5,7 @@ namespace BanHammer;
 use pocketmine\plugin\PluginBase;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\permission\BanList;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\Player;
 
@@ -53,8 +54,10 @@ class Main extends PluginBase{
     */
     public function onInteract(PlayerInteractEvent $event){
     	$player = $event->getPlayer();
-        $target = $event->getPlayer($target); //Is this how we get the target?
+        $target = $event->getPlayer($target); //hello. player interact is not implamented yet. and the event you are using is when player touch a block
+    //$target well get entity of the player but not the username. i am now trying to find out how you do that.
     }
+    
     
     public function onDisable(){
         $this->getLogger()->log("[BanHammer] BanHammer Unloaded!");
