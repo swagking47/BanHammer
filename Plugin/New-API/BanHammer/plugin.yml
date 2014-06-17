@@ -16,4 +16,4 @@ commands:
         
 permissions:
     banhammer.command.banhammer:
-        default: false
+        default: op
