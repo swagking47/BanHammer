@@ -12,8 +12,11 @@ commands:
         desctiption: "Main BanHammer Command"
         usage: "/banhammer <get|edit|allow> [player]"
         aiases: [bh]
-        permission: banhammer.command.banhammer
         
 permissions:
-    banhammer.command.banhammer:
-        default: false
+    banhammer.get:
+        default: true
+    banhammer.edit:
+        default: op
+    banhammer.allow:
+        default: op
