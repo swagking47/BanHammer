@@ -70,16 +70,21 @@ class Main extends PluginBase{
 				    	$sender->sendMessage("[BanHammer] You can only use this command in-game!");
 				    	return true;
 				    }else{
-				        if(file_exists($this->plugin->getDataFolder() . "Players/" . $asender->getName() . ".yml")){ //I'll figure our the real way to do that later
-				    	    $id = Item::fromString($this->getConfig()->get("BanHammer")); //Is this right?
-				    	    $item = $id->setCount(1); //Is this right?
-				    	    $sender->getInventory()->addItem(clone $item);
-				    	    $sender->sendMessage("[BanHammer] The BanHammer has been added to your inventory!");
-				    	    return true;
-				        }else{
+				    	if($sender->hasPermission("banhammer.get")){
+				            if(file_exists($this->plugin->getDataFolder() . "Players/" . $asender->getName() . ".yml")){ //I'll figure our the real way to do that later
+				    	        $id = Item::fromString($this->getConfig()->get("BanHammer")); //Is this right?
+				    	        $item = $id->setCount(1); //Is this right?
+				    	        $sender->getInventory()->addItem(clone $item);
+				    	        $sender->sendMessage("[BanHammer] The BanHammer has been added to your inventory!");
+				    	        return true;
+				            }else{
+				    	        $sender->sendMessage("[BanHammer] You do not have permission to do that!");
+				    	        return true;
+				            }
+				    	}else{
 				    	    $sender->sendMessage("[BanHammer] You do not have permission to do that!");
 				    	    return true;
-				        }
+				    	}
 				    }
 				}elseif($args[0] == "allow"){
 				    if(isset($args[1])){
@@ -108,9 +113,9 @@ class Main extends PluginBase{
     public function onAttack(PlayerAttackEvent $event){
     	$player = $event->getPlayer();
     	$target = $event->getPlayer($target);
-    	if($player->getWeapon()->getID() == ""){ //Obviously this will have to be changed when PvP is implemented...
-    	    if(file_exists($this->plugin->getDataFolder() . "Players/" . $player . ".yml")){
-    	        if(file_exists($this->plugin->getDataFolder() . "Players/" . $player . ".yml")){
+    	if($player->getItem()->getID() == $this->getConfig()->get("BanHammer")){ //Obviously this will have to be changed when PvP is implemented...
+    	    if(file_exists($this->plugin->getDataFolder() . "Players/" . $player->getName() . ".yml")){
+    	        if(file_exists($this->plugin->getDataFolder() . "Players/" . $target->getName() . ".yml")){
     	            $sender->sendMessage("[BanHammer] You do not have permission to " . $this->getConfig()->get("BanType") . " that player!");
     	            $event->setCanceled(true);
     	        }else{
@@ -123,9 +128,9 @@ class Main extends PluginBase{
 			}
     	            }elseif($this->getConfig()->get("BanType") == "ban"){
     	                $player->getServer()->getNameBans()->addBan($target->getName(), "The BanHammer has spoken!", null, $player->getName());
-			$target->kick("The BanHammer has spoken!");
+			$target->getName()->kick("The BanHammer has spoken!");
     	            }elseif($this->getConfig()->get("BanType") == "kick"){
-    	                $target->kick("The BanHammer has spoken!");
+    	                $target->getName()->kick("The BanHammer has spoken!");
     	            }
     	        }
     	    }
