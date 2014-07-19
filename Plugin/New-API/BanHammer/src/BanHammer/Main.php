@@ -7,7 +7,6 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\CommandExecutor;
 use pocketmine\event\Listener;
-use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\Player;
 
@@ -114,9 +113,11 @@ class Main extends PluginBase implements Listener, CommandExecutor{
         }
     }
 	
-    public function onAttack(EntityDamageEvent $entity, EntityDamageByEntityEvent $damager){
-    	$player = $entity->getDamager();
-    	$target = $damager->getEntity();
+    public function onAttack(EntityDamageByEntityEvent $event){
+    	if(($event->getDamager()) instanceof Player){
+    		$player = $event->getDamager();
+        if(($event->getEntity()) instanceof Player){
+        	$target = $event->getEntity()
     	if($player->getItem()->getID() == $this->getConfig()->get("BanHammer")){
     	    if(file_exists($this->getDataFolder() . "Players/" . $player->getName() . ".yml")){
     	        if(file_exists($this->getDataFolder() . "Players/" . $target->getName() . ".yml")){
@@ -139,6 +140,8 @@ class Main extends PluginBase implements Listener, CommandExecutor{
     	            }
     	        }
     	    }
+    	}
+    }
     	}
     }
     
