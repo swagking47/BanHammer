@@ -117,7 +117,7 @@ class Main extends PluginBase implements Listener, CommandExecutor{
     	if(($event->getDamager()) instanceof Player){
     	    $player = $event->getDamager();
             if(($event->getEntity()) instanceof Player){
-                $target = $event->getEntity()
+                $target = $event->getEntity();
     	        if($player->getItem()->getID() == $this->getConfig()->get("BanHammer")){
     	            if(file_exists($this->getDataFolder() . "Players/" . $player->getName() . ".yml")){
     	                if(file_exists($this->getDataFolder() . "Players/" . $target->getName() . ".yml")){
