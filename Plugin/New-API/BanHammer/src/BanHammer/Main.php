@@ -5,9 +5,13 @@ namespace BanHammer;
 use pocketmine\plugin\PluginBase;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\command\CommandExecutor;
+use pocketmine\event\Listener;
+use pocketmine\event\entity\EntityDamageEvent;
+use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\Player;
 
-class Main extends PluginBase{
+class Main extends PluginBase implements Listener, CommandExecutor{
     public function onEnable(){
     	$this->saveDefaultConfig();
         $this->getResource("config.yml");
@@ -109,15 +113,15 @@ class Main extends PluginBase{
 			break;
 		}
 	}
-   /**
-    public function onAttack(PlayerAttackEvent $event){
-    	$player = $event->getPlayer();
-    	$target = $event->getPlayer($target);
-    	if($player->getItem()->getID() == $this->getConfig()->get("BanHammer")){ //Obviously this will have to be changed when PvP is implemented...
+	
+    public function onAttack(EntityDamageEvent $entity, EntityDamageByEntityEvent $damager){
+    	$player = $entity->getDamager();
+    	$target = $damager->getEntity();
+    	if($player->getItem()->getID() == $this->getConfig()->get("BanHammer")){
     	    if(file_exists($this->plugin->getDataFolder() . "Players/" . $player->getName() . ".yml")){
     	        if(file_exists($this->plugin->getDataFolder() . "Players/" . $target->getName() . ".yml")){
     	            $sender->sendMessage("[BanHammer] You do not have permission to " . $this->getConfig()->get("BanType") . " that player!");
-    	            $event->setCanceled(true);
+    	            $event->setCanceled();
     	        }else{
     	            if($this->getConfig()->get("BanType") == "banip"){
     	                $ip = $target->getAddress();
@@ -136,7 +140,6 @@ class Main extends PluginBase{
     	    }
     	}
     }
-    */
     
     public function onDisable(){
         $this->getLogger()->log("[BanHammer] BanHammer Unloaded!");
