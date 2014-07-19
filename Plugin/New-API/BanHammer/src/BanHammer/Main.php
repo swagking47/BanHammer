@@ -115,33 +115,33 @@ class Main extends PluginBase implements Listener, CommandExecutor{
 	
     public function onAttack(EntityDamageByEntityEvent $event){
     	if(($event->getDamager()) instanceof Player){
-    		$player = $event->getDamager();
-        if(($event->getEntity()) instanceof Player){
-        	$target = $event->getEntity()
-    	if($player->getItem()->getID() == $this->getConfig()->get("BanHammer")){
-    	    if(file_exists($this->getDataFolder() . "Players/" . $player->getName() . ".yml")){
-    	        if(file_exists($this->getDataFolder() . "Players/" . $target->getName() . ".yml")){
-    	            $sender->sendMessage("[BanHammer] You do not have permission to " . $this->getConfig()->get("BanType") . " that player!");
-    	            $event->setCanceled();
-    	        }else{
-    	            if($this->getConfig()->get("BanType") == "banip"){
-    	                $ip = $target->getAddress();
-    	                $player->getServer()->getIPBans()->addBan($ip, "The BanHammer has spoken!", null, $player->getName());
-    	                foreach($sender->getServer()->getOnlinePlayers() as $t){
-			    if($t->getAddress() === $ip){
-			        $t->kick("The BanHammer has Spoken!");
-			    }
-			}
-    	            }elseif($this->getConfig()->get("BanType") == "ban"){
-    	                $player->getServer()->getNameBans()->addBan($target->getName(), "The BanHammer has spoken!", null, $player->getName());
-			$target->getName()->kick("The BanHammer has spoken!");
-    	            }elseif($this->getConfig()->get("BanType") == "kick"){
-    	                $target->getName()->kick("The BanHammer has spoken!");
+    	    $player = $event->getDamager();
+            if(($event->getEntity()) instanceof Player){
+                $target = $event->getEntity()
+    	        if($player->getItem()->getID() == $this->getConfig()->get("BanHammer")){
+    	            if(file_exists($this->getDataFolder() . "Players/" . $player->getName() . ".yml")){
+    	                if(file_exists($this->getDataFolder() . "Players/" . $target->getName() . ".yml")){
+    	                    $sender->sendMessage("[BanHammer] You do not have permission to " . $this->getConfig()->get("BanType") . " that player!");
+    	                    $event->setCanceled();
+    	                }else{
+    	                    if($this->getConfig()->get("BanType") == "banip"){
+    	                        $ip = $target->getAddress();
+    	                        $player->getServer()->getIPBans()->addBan($ip, "The BanHammer has spoken!", null, $player->getName());
+    	                        foreach($sender->getServer()->getOnlinePlayers() as $t){
+		    	            if($t->getAddress() === $ip){
+			                $t->kick("The BanHammer has Spoken!");
+			            }
+			        }
+    	                    }elseif($this->getConfig()->get("BanType") == "ban"){
+    	                        $player->getServer()->getNameBans()->addBan($target->getName(), "The BanHammer has spoken!", null, $player->getName());
+			        $target->getName()->kick("The BanHammer has spoken!");
+    	                    }elseif($this->getConfig()->get("BanType") == "kick"){
+    	                        $target->getName()->kick("The BanHammer has spoken!");
+    	                    }
+    	                }
     	            }
     	        }
-    	    }
-    	}
-    }
+            }
     	}
     }
     
