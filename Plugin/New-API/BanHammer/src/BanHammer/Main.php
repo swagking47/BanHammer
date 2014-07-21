@@ -115,7 +115,7 @@ class Main extends PluginBase implements Listener, CommandExecutor{
     	            if($player->hasPermission("banhammer.use")){
     	                if($target->hasPermission("banhammer.use") or $target->hasPermission("banhammer.exempt")){
     	                    $sender->sendMessage("[BanHammer] You do not have permission to " . $this->getConfig()->get("BanType") . " that player!");
-    	                    $event->setCanceled();
+    	                    $event->setCancelled();
     	                }else{
     	                    if($this->getConfig()->get("BanType") == "banip"){
     	                        $ip = $target->getAddress();
