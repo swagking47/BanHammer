@@ -8,6 +8,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\command\CommandExecutor;
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
+use pocketmine\item\Item;
 use pocketmine\utils\Config;
 use pocketmine\Player;
 
@@ -121,8 +122,8 @@ class Main extends PluginBase implements Listener, CommandExecutor{
     	                        $ip = $target->getAddress();
     	                        $player->getServer()->getIPBans()->addBan($ip, "The BanHammer has spoken!", null, $player->getName());
     	                        foreach($sender->getServer()->getOnlinePlayers() as $t){
-		    	            if($t->getAddress() === $ip){
-			                $t->kick("The BanHammer has Spoken!");
+		    	                   if($t->getAddress() === $ip){
+	    	                $t->kick("The BanHammer has Spoken!");
 			            }
 			        }
     	                    }elseif($this->getConfig()->get("BanType") == "ban"){
