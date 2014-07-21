@@ -89,37 +89,16 @@ class Main extends PluginBase implements Listener, CommandExecutor{
 			$sender->sendMessage("[BanHammer] You can only use this command in-game!");
 			return true;
 		    }else{
-			if($sender->hasPermission("banhammer.get")){
-			    if(file_exists($this->getDataFolder() . "Players/" . $sender->getName() . ".yml")){
+			if($sender->hasPermission("banhammer.use")){
 				$id = Item::fromString($this->getConfig()->get("BanHammer"));
 				$item = $id->setCount(1);
 				$sender->getInventory()->addItem(clone $item);
 				$sender->sendMessage("[BanHammer] The BanHammer has been added to your inventory!");
 			        return true;
-			    }else{
-				$sender->sendMessage("[BanHammer] You do not have permission to do that!");
-			        return true;
-			    }
 			}else{
 			    $sender->sendMessage("[BanHammer] You do not have permission to do that!");
 			    return true;
 		        }
-		    }
-		}elseif($args[0] == "allow"){
-		    if(isset($args[1])){
-			if(file_exists($this->getDataFolder() . "Players/" . $args[1] . ".yml")){
-			    $sender->sendMessage("[BanHammer] " . $args[1] . " already has that permission!");
-			    return true;
-			}else{
-			    $allow = new Config($this->getDataFolder() . "Players/" . $args[1] . ".yml", Config::YAML);
-			    $allow->set("PlayerName", $args[1]);
-			    $allow->save();
-			    $sender->sendMessage("[BanHammer] " . $args[1] . " can now use the BanHammer!");
-			    return true;
-			}
-		    }else{
-			$sender->sendMessage("[BanHammer] You must specify a player name!");
-			return true;
 		    }
 		}else{
 		    $sender->sendMessage("Usage: /banhammer <get|edit|allow> [player]");
@@ -136,8 +115,8 @@ class Main extends PluginBase implements Listener, CommandExecutor{
             if(($event->getEntity()) instanceof Player){
                 $target = $event->getEntity();
     	        if($player->getItem()->getID() == $this->getConfig()->get("BanHammer")){
-    	            if(file_exists($this->getDataFolder() . "Players/" . $player->getName() . ".yml")){
-    	                if(file_exists($this->getDataFolder() . "Players/" . $target->getName() . ".yml")){
+    	            if($player->hasPermission("banhammer.use")){
+    	                if($target->hasPermission("banhammer.use")){
     	                    $sender->sendMessage("[BanHammer] You do not have permission to " . $this->getConfig()->get("BanType") . " that player!");
     	                    $event->setCanceled();
     	                }else{
