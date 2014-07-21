@@ -1,6 +1,6 @@
 name: BanHammer
 main: BanHammer\Main
-version: 1.8.2
+version: 1.8.3
 api: [1.0.0, 1.1.0]
 
 load: POSTWORLD
@@ -19,4 +19,6 @@ permissions:
     banhammer.edit:
         default: op
     banhammer.allow:
+        default: op
+    banhammer.use:
         default: op
