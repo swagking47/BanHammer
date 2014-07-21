@@ -10,15 +10,13 @@ description: The BanHammer Has Spoken!
 commands:
     banhammer:
         desctiption: "BanHammer Admin Commands!"
-        usage: "/banhammer <get|edit|allow> [player]"
+        usage: "/banhammer <get|edit> [banip|ban|kick]"
         aiases: [bh]
         
 permissions:
-    banhammer.get:
-        default: op
     banhammer.edit:
         default: op
-    banhammer.allow:
-        default: op
     banhammer.use:
+        default: op
+    banhammer.exempt:
         default: op
