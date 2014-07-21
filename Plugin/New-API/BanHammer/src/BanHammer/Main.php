@@ -8,6 +8,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\command\CommandExecutor;
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
+use pocketmine\utils\Config;
 use pocketmine\Player;
 
 class Main extends PluginBase implements Listener, CommandExecutor{
@@ -23,9 +24,21 @@ class Main extends PluginBase implements Listener, CommandExecutor{
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args){
 	switch($cmd->getName()){
 	    case "banhammer":
+		if(!isset($args[0])){
+		    $sender->sendMessage("Usage: /banhammer <get|edit|allow> [player]");
+		    return true;
+		}else{
 		if($args[0] == "edit"){
+		    if(!isset($args[1])){
+			    $sender->sendMessage("Usage: /banhammer edit <type>");
+			    return true;
+			}else{
 		    if($sender->hasPermission("banhammer.edit")){
 			if($args[1] == "type"){
+			    if(!isset($args[2])){
+				    $sender->sendMessage("Usage: /banhammer edit type <banip|ban|kick>");
+				    return true;
+				}else{
 			    if($args[2] == "banip"){
 				$current = $this->getConfig()->get("BanType");
 				if($current == "banip"){
@@ -63,20 +76,22 @@ class Main extends PluginBase implements Listener, CommandExecutor{
 				$sender->sendMessage("Usage: /banhammer edit <type> <banip|ban|kick>");
 			        return true;
 			    }
+		  	  }
 			}
 		    }else{
 			$sender->sendMessage("[BanHammer] You do not have permission to do that!");
 		        return true;
 		    }
+			}
 		}elseif($args[0] == "get"){
 		    if(!$sender instanceof Player){
 			$sender->sendMessage("[BanHammer] You can only use this command in-game!");
 			return true;
 		    }else{
 			if($sender->hasPermission("banhammer.get")){
-			    if(file_exists($this->getDataFolder() . "Players/" . $sender->getName() . ".yml")){ //I'll figure our the real way to do that later
-				$id = Item::fromString($this->getConfig()->get("BanHammer")); //Is this right?
-				$item = $id->setCount(1); //Is this right?
+			    if(file_exists($this->getDataFolder() . "Players/" . $sender->getName() . ".yml")){
+				$id = Item::fromString($this->getConfig()->get("BanHammer"));
+				$item = $id->setCount(1);
 				$sender->getInventory()->addItem(clone $item);
 				$sender->sendMessage("[BanHammer] The BanHammer has been added to your inventory!");
 			        return true;
@@ -111,6 +126,7 @@ class Main extends PluginBase implements Listener, CommandExecutor{
 	        }
 	    break;
         }
+      }
     }
 	
     public function onAttack(EntityDamageByEntityEvent $event){
