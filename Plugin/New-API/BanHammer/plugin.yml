@@ -1,6 +1,6 @@
 name: BanHammer
 main: BanHammer\Main
-version: 1.8.1dev
+version: 1.8.2
 api: [1.0.0, 1.1.0]
 
 load: POSTWORLD
@@ -9,7 +9,7 @@ description: The BanHammer Has Spoken!
 
 commands:
     banhammer:
-        desctiption: "Main BanHammer Command"
+        desctiption: "BanHammer Admin Commands!"
         usage: "/banhammer <get|edit|allow> [player]"
         aiases: [bh]
         
