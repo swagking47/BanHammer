@@ -74,7 +74,7 @@ class Main extends PluginBase implements Listener, CommandExecutor{
 			return true;
 		    }else{
 			if($sender->hasPermission("banhammer.get")){
-			    if(file_exists($this->getDataFolder() . "Players/" . $asender->getName() . ".yml")){ //I'll figure our the real way to do that later
+			    if(file_exists($this->getDataFolder() . "Players/" . $sender->getName() . ".yml")){ //I'll figure our the real way to do that later
 				$id = Item::fromString($this->getConfig()->get("BanHammer")); //Is this right?
 				$item = $id->setCount(1); //Is this right?
 				$sender->getInventory()->addItem(clone $item);
