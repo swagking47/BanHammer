@@ -16,9 +16,6 @@ class Main extends PluginBase implements Listener, CommandExecutor{
     	$this->saveDefaultConfig();
         $this->getResource("config.yml");
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-    	if(!file_exists($this->getDataFolder() . "Players/")){
-	    @mkdir($this->getDataFolder() . "Players/");
-	}
         $this->getLogger()->info("BanHammer Loaded!");
     }
     
@@ -26,7 +23,7 @@ class Main extends PluginBase implements Listener, CommandExecutor{
 	switch($cmd->getName()){
 	    case "banhammer":
 		if(!isset($args[0])){
-		    $sender->sendMessage("Usage: /banhammer <get|edit|allow> [player]");
+		    $sender->sendMessage("Usage: /banhammer <get|edit> [banip|ban|kick]");
 		    return true;
 		}else{
 		if($args[0] == "edit"){
@@ -101,7 +98,7 @@ class Main extends PluginBase implements Listener, CommandExecutor{
 		        }
 		    }
 		}else{
-		    $sender->sendMessage("Usage: /banhammer <get|edit|allow> [player]");
+		    $sender->sendMessage("Usage: /banhammer <get|edit> [banip|ban|kick]");
 		    return true;
 	        }
 	    break;
