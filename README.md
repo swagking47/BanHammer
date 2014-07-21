@@ -9,7 +9,7 @@ To Install:
 
 1) Stop server (If Online)
 
-2) Place BanHammer.php into your /Plugins folder
+2) Place BanHammer.php (or .phar for the new API version) into your /plugins folder
 
 3) Start your server
 
