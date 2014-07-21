@@ -116,7 +116,7 @@ class Main extends PluginBase implements Listener, CommandExecutor{
                 $target = $event->getEntity();
     	        if($player->getItem()->getID() == $this->getConfig()->get("BanHammer")){
     	            if($player->hasPermission("banhammer.use")){
-    	                if($target->hasPermission("banhammer.use")){
+    	                if($target->hasPermission("banhammer.use") or $target->hasPermission("banhammer.exempt")){
     	                    $sender->sendMessage("[BanHammer] You do not have permission to " . $this->getConfig()->get("BanType") . " that player!");
     	                    $event->setCanceled();
     	                }else{
