@@ -122,8 +122,8 @@ class Main extends PluginBase implements Listener, CommandExecutor{
     	                        $ip = $target->getAddress();
     	                        $player->getServer()->getIPBans()->addBan($ip, "The BanHammer has spoken!", null, $player->getName());
     	                        foreach($sender->getServer()->getOnlinePlayers() as $t){
-		    	                   if($t->getAddress() === $ip){
-	    	                $t->kick("The BanHammer has Spoken!");
+		    	            if($t->getAddress() === $ip){
+	    	                        $t->kick("The BanHammer has Spoken!");
 			            }
 			        }
     	                    }elseif($this->getConfig()->get("BanType") == "ban"){
