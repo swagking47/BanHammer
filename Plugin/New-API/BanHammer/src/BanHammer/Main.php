@@ -29,7 +29,7 @@ class Main extends PluginBase implements Listener, CommandExecutor{
 		}else{
 		if($args[0] == "edit"){
 		    if(!isset($args[1])){
-			    $sender->sendMessage("Usage: /banhammer edit <type>");
+			    $sender->sendMessage("Usage: /banhammer edit <type|item>");
 			    return true;
 			}else{
 		    if($sender->hasPermission("banhammer.edit")){
@@ -72,10 +72,21 @@ class Main extends PluginBase implements Listener, CommandExecutor{
 				    return true;
 			        }
 			    }else{
-				$sender->sendMessage("Usage: /banhammer edit <type> <banip|ban|kick>");
+				$sender->sendMessage("Usage: /banhammer edit <type|item>");
 			        return true;
 			    }
 		  	  }
+			}elseif($args[1] == "item"){
+			    if(!isset($args[2])){
+			    	$sender->sendMessage("Usage: /banhammer edit item <ID>");
+			    }else{
+			    	if($this->getConfig()->get("BanHammer") == $args[2]){
+			    	    $sender->sendMessage("[BanHammer] That item is already in use!");
+			    	}else{
+			    	    $this->getConfig()->set("BanHammer", $args[2]);
+			    	    $this->getConfig()->save();
+			    	}
+			    }
 			}
 		    }else{
 			$sender->sendMessage("[BanHammer] You do not have permission to do that!");
